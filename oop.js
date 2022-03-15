@@ -22,3 +22,16 @@ const matilda = new Person('Matilda', 2017);
 const jack = new Person('Jack', 1975);
 console.log(matilda);
 console.log(jack);
+
+console.log(jonas instanceof Person);
+
+// Prototypes //
+Person.prototype.calcAge = function () {
+  console.log(2037 - this.birthYear);
+};
+
+jonas.calcAge();
+matilda.calcAge();
+
+Person.prototype.species = 'Homo Sapiens';
+console.log(jonas.species, matilda.species);
