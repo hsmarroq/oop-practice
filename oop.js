@@ -39,29 +39,29 @@ console.log(jonas.species, matilda.species);
 console.log(jonas.__proto__.__proto__);
 
 // Coding Challenge #1 //
-const Car = function (make, speed) {
-  this.make = make;
-  this.speed = speed;
-};
+// const Car = function (make, speed) {
+//   this.make = make;
+//   this.speed = speed;
+// };
 
-Car.prototype.accelerate = function () {
-  this.speed += 10;
-  console.log(`${this.make} is going at ${this.speed} km/h.`);
-};
+// Car.prototype.accelerate = function () {
+//   this.speed += 10;
+//   console.log(`${this.make} is going at ${this.speed} km/h.`);
+// };
 
-Car.prototype.brake = function () {
-  this.speed -= 5;
-  console.log(`${this.make} is going at ${this.speed} km/h.`);
-};
+// Car.prototype.brake = function () {
+//   this.speed -= 5;
+//   console.log(`${this.make} is going at ${this.speed} km/h.`);
+// };
 
-const bmw = new Car('BMW', 120);
-console.log(bmw);
-bmw.accelerate();
-bmw.brake();
-const mercedes = new Car('Mercedes', 95);
-console.log(mercedes);
-mercedes.accelerate();
-mercedes.brake();
+// const bmw = new Car('BMW', 120);
+// console.log(bmw);
+// bmw.accelerate();
+// bmw.brake();
+// const mercedes = new Car('Mercedes', 95);
+// console.log(mercedes);
+// mercedes.accelerate();
+// mercedes.brake();
 
 // Class Expressions
 // const PersonCl = class {};
@@ -101,7 +101,7 @@ class PersonCl {
   // Static Method
   static hey() {
     console.log(`Hey there!`);
-    console.log(this);
+    // console.log(this);
   }
 }
 
@@ -123,6 +123,7 @@ const walter = new PersonCl('Walter White', 1965);
 
 PersonCl.hey();
 
+/*
 const account = {
   owner: 'Jonas',
   movements: [200, 530, 120, 300],
@@ -144,3 +145,51 @@ console.log(account.latest);
 
 account.latest = 50;
 console.log(account.movements);
+*/
+
+/*
+const PersonProto = {
+  calcAge() {
+    console.log(2037 - this.birthYear);
+  },
+};
+
+const steven = Object.create(PersonProto);
+console.log(steven);
+steven.name - 'Steven';
+steven.birthYear = 2002;
+steven.calcAge();
+*/
+
+// Coding Challenge #2 //
+class CarCl {
+  constructor(make, speed) {
+    this.make = make;
+    this.speed = speed;
+  }
+
+  accelerate() {
+    this.speed += 10;
+    console.log(`${this.make} is going at ${this.speed} km/h.`);
+  }
+
+  brake() {
+    this.speed -= 5;
+    console.log(`${this.make} is going at ${this.speed} km/h.`);
+  }
+
+  get speedUS() {
+    return this.speed / 1.6;
+  }
+
+  set speedUS(currSpeed) {
+    this.speed = currSpeed * 1.6;
+  }
+}
+
+const ford = new CarCl('Ford', 120);
+console.log(ford.speedUS);
+ford.accelerate;
+ford.brake;
+ford.speedUS = 50;
+console.log(ford);
