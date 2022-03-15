@@ -1,5 +1,5 @@
 'use strict';
-/*
+
 const Person = function (firstName, birthYear) {
   this.firstName = firstName;
   this.birthYear = birthYear;
@@ -62,7 +62,6 @@ const mercedes = new Car('Mercedes', 95);
 console.log(mercedes);
 mercedes.accelerate();
 mercedes.brake();
-*/
 
 // Class Expressions
 // const PersonCl = class {};
@@ -98,6 +97,12 @@ class PersonCl {
   get fullName() {
     return this._fullName;
   }
+
+  // Static Method
+  static hey() {
+    console.log(`Hey there!`);
+    console.log(this);
+  }
 }
 
 const jessica = new PersonCl('Jessica Davis', 1996);
@@ -115,6 +120,8 @@ jessica.greet();
 // 3. Classes are executed in strict mode
 
 const walter = new PersonCl('Walter White', 1965);
+
+PersonCl.hey();
 
 const account = {
   owner: 'Jonas',
