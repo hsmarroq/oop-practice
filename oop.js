@@ -332,70 +332,133 @@ steven.calcAge();
 // 3. Public Methods
 // 4. Private Methods
 
-class Account {
-  // 1. Public Fields (instances)
-  locale = navigator.language;
+// class Account {
+//   // 1. Public Fields (instances)
+//   locale = navigator.language;
 
-  // 2. Private Fields
-  #movements = [];
-  #pin;
+// 2. Private Fields
+//   #movements = [];
+//   #pin;
 
-  constructor(owner, currency, pin) {
-    this.owner = owner;
-    this.currency = currency;
-    // Protected Property
-    this.#pin = pin;
-    // this._movements = [];
-    // this.locale = navigator.language;
+//   constructor(owner, currency, pin) {
+//     this.owner = owner;
+//     this.currency = currency;
+//     // Protected Property
+//     this.#pin = pin;
+//     // this._movements = [];
+//     // this.locale = navigator.language;
 
-    console.log(`Thanks for opening an accounr, ${this.owner}!`);
+//     console.log(`Thanks for opening an accounr, ${this.owner}!`);
+//   }
+//   // 3. Public Methods
+//   // Public interface
+//   getMovements() {
+//     return this.#movements;
+//   }
+
+//   deposit(val) {
+//     this.#movements.push(val);
+//     return this;
+//   }
+
+//   withdraw(val) {
+//     this.deposit(-val);
+//     return this;
+//   }
+
+//   requestLoan(val) {
+//     if (this._approveLoan(val)) {
+//       this.deposit(val);
+//       console.log(`Your loan has been approved.`);
+//       return this;
+//     }
+//   }
+
+//   static helper() {
+//     console.log(`Helper`);
+//   }
+
+//   // 4. Private Methods
+//   // #approveLoan(val) {
+//   _approveLoan(val) {
+//     return true;
+//   }
+// }
+
+// const acc1 = new Account('Jonas', 'EUR', 1111);
+
+// acc1.deposit(150);
+// acc1.withdraw(140);
+// acc1.requestLoan(1000);
+// console.log(acc1.getMovements());
+// console.log(acc1);
+// Account.helper();
+
+// // console.log(acc1.#movements);
+
+// // Chaining
+// acc1.deposit(300).deposit(500).withdraw(35).requestLoan(25000).withdraw(4000);
+// console.log(acc1.getMovements());
+
+// Challenge #4 //
+class CarCl {
+  constructor(make, speed) {
+    this.make = make;
+    this.speed = speed;
   }
-  // 3. Public Methods
-  // Public interface
-  getMovements() {
-    return this.#movements;
-  }
 
-  deposit(val) {
-    this.#movements.push(val);
+  accelerate() {
+    this.speed += 10;
+    console.log(`${this.make} is going at ${this.speed} km/h.`);
     return this;
   }
 
-  withdraw(val) {
-    this.deposit(-val);
+  brake() {
+    this.speed -= 5;
+    console.log(`${this.make} is going at ${this.speed} km/h.`);
     return this;
   }
 
-  requestLoan(val) {
-    if (this._approveLoan(val)) {
-      this.deposit(val);
-      console.log(`Your loan has been approved.`);
-      return this;
-    }
+  get speedUS() {
+    return this.speed / 1.6;
   }
 
-  static helper() {
-    console.log(`Helper`);
-  }
-
-  // 4. Private Methods
-  // #approveLoan(val) {
-  _approveLoan(val) {
-    return true;
+  set speedUS(speed) {
+    this.speed = speed * 1.6;
   }
 }
 
-const acc1 = new Account('Jonas', 'EUR', 1111);
+class EVCL extends CarCl {
+  #charge;
 
-acc1.deposit(150);
-acc1.withdraw(140);
-acc1.requestLoan(1000);
-console.log(acc1.getMovements());
-console.log(acc1);
-Account.helper();
+  constructor(make, speed, charge) {
+    super(make, speed);
+    this.#charge = charge;
+  }
 
-// console.log(acc1.#movements);
+  chargeBattery(chargeTo) {
+    this.#charge = chargeTo;
+    return this;
+  }
 
-// Chaining
-acc1.deposit(300).deposit(500).withdraw(35).requestLoan(25000).withdraw(4000);
-console.log(acc1.getMovements());
+  accelerate(speedTo) {
+    this.speed += 20;
+    this.#charge--;
+    console.log(
+      `${this.make} is going at ${this.speed} km/h, with a charge of ${this.charge}.`
+    );
+    return this;
+  }
+}
+
+const rivian = new EVCL('Rivian', 120, 23);
+
+rivian
+  .accelerate()
+  .accelerate()
+  .brake()
+  .chargeBattery(50)
+  .accelerate()
+  .accelerate();
+
+console.log(rivian.speedUS);
